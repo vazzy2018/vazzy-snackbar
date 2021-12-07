@@ -1,0 +1,375 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+:root {
+  --vazzy-snackbar-row-gap: 15px;
+  --vazzy-snackbar-x-gap: 20px;
+  --vazzy-snackbar-y-gap: 20px;
+  --vazzy-snackbar-width: 380px;
+  --vazzy-snackbar-close-btn-size: 20px;
+  --vazzy-snackbar-padding: 15px;
+  --vazzy-snackbar-font-size: 1rem;
+  --vazzy-snackbar-default-color: #fff;
+  --vazzy-snackbar-default-background: #3d3d3d;
+  --vazzy-snackbar-btn-default-color: #fff;
+  --vazzy-snackbar-btn-default-background: rgba(255, 255, 255, 0.2);
+  --vazzy-snackbar-popup-color: #111111;
+  --vazzy-snackbar-popup-close-btn-color: #333;
+}
+
+.vazzy-snackbar-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: var(--vazzy-snackbar-row-gap);
+  width: 100%;
+}
+
+.vazzy-snackbar-list:empty {
+  display: none;
+}
+
+.vazzy-snackbar-list--static {
+  position: static;
+}
+
+.vazzy-snackbar-list--fixed {
+  position: fixed;
+  z-index: 10000;
+}
+
+.vazzy-snackbar-list--sticky {
+  position: sticky;
+}
+
+.vazzy-snackbar-list--fixed.vazzy-snackbar-list--left {
+  left: var(--vazzy-snackbar-x-gap);
+  max-width: var(--vazzy-snackbar-width);
+}
+
+@media (max-width: 560px) {
+  .vazzy-snackbar-list--fixed.vazzy-snackbar-list--left {
+    left: 0;
+  }
+}
+
+.vazzy-snackbar-list--fixed.vazzy-snackbar-list--right {
+  right: var(--vazzy-snackbar-x-gap);
+  max-width: var(--vazzy-snackbar-width);
+}
+
+@media (max-width: 560px) {
+  .vazzy-snackbar-list--fixed.vazzy-snackbar-list--right {
+    right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .vazzy-snackbar-list--fixed.vazzy-snackbar-list--left,
+  .vazzy-snackbar-list--fixed.vazzy-snackbar-list--right {
+    max-width: 100%;
+  }
+}
+
+.vazzy-snackbar-list--fullwidth {
+  --vazzy-snackbar-close-btn-y: 10px;
+}
+
+.vazzy-snackbar-list--fixed.vazzy-snackbar-list--fullwidth {
+  width: 100%;
+}
+
+.vazzy-snackbar-list--fixed.vazzy-snackbar-list--top {
+  top: var(--vazzy-snackbar-y-gap);
+}
+
+@media (max-width: 560px) {
+  .vazzy-snackbar-list--fixed.vazzy-snackbar-list--top {
+    top: 0;
+  }
+}
+
+.vazzy-snackbar-list--fixed.vazzy-snackbar-list--bot {
+  bottom: var(--vazzy-snackbar-y-gap);
+}
+
+@media (max-width: 560px) {
+  .vazzy-snackbar-list--fixed.vazzy-snackbar-list--bot {
+    bottom: 0;
+  }
+}
+
+.vazzy-snackbar-list--fixed.vazzy-snackbar-list--fullwidth.vazzy-snackbar-list--top {
+  top: 0;
+}
+
+.vazzy-snackbar-list--fixed.vazzy-snackbar-list--fullwidth.vazzy-snackbar-list--bot {
+  bottom: 0;
+}
+
+.vazzy-snackbar-list--sticky.vazzy-snackbar-list--top {
+  top: 0;
+}
+
+.vazzy-snackbar-list--sticky.vazzy-snackbar-list--bot {
+  bottom: 0;
+}
+
+.vazzy-snackbar {
+  display: grid;
+  position: relative;
+  font-size: var(--vazzy-snackbar-font-size);
+  color: var(--vazzy-snackbar-default-color);
+  background-color: var(--vazzy-snackbar-default-background);
+  line-height: 1.2em;
+  transition-duration: 0.15s;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.vazzy-snackbar-list--fullwidth .vazzy-snackbar--closed {
+  opacity: 0;
+}
+
+.vazzy-snackbar-list--left .vazzy-snackbar--closed,
+.vazzy-snackbar-list--right .vazzy-snackbar--closed {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.vazzy-snackbar-list--fixed .vazzy-snackbar {
+  box-shadow: 1px 1px 7px 1px #0000004a;
+}
+
+.vazzy-snackbar-list--left .vazzy-snackbar,
+.vazzy-snackbar-list--right .vazzy-snackbar {
+  grid-template-columns: 1fr;
+  padding: calc(var(--vazzy-snackbar-padding) - var(--vazzy-snackbar-padding) / 3)
+    calc(var(--vazzy-snackbar-padding) - var(--vazzy-snackbar-padding) / 3)
+    var(--vazzy-snackbar-padding) var(--vazzy-snackbar-padding);
+}
+
+.vazzy-snackbar-list--fullwidth .vazzy-snackbar {
+  grid-template-columns: 1fr auto;
+  padding: calc(var(--vazzy-snackbar-padding) - var(--vazzy-snackbar-padding) / 5)
+    var(--vazzy-snackbar-padding)
+    calc(var(--vazzy-snackbar-padding) - var(--vazzy-snackbar-padding) / 5)
+    var(--vazzy-snackbar-padding);
+}
+
+.vazzy-snackbar--align-left .vazzy-snackbar__inner {
+  grid-template-columns: auto auto;
+  justify-content: start;
+}
+
+.vazzy-snackbar--align-center .vazzy-snackbar__inner {
+  grid-template-columns: auto auto;
+  justify-content: center;
+}
+
+.vazzy-snackbar--align-right .vazzy-snackbar__inner {
+  grid-template-columns: auto auto;
+  justify-content: end;
+}
+
+.vazzy-snackbar--align-fullwidth .vazzy-snackbar__inner {
+  grid-template-columns: 1fr auto;
+}
+
+.vazzy-snackbar-list--fullwidth .vazzy-snackbar__inner {
+  display: grid;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .vazzy-snackbar-list--fullwidth .vazzy-snackbar__inner {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+}
+
+.vazzy-snackbar-list--left .vazzy-snackbar__content,
+.vazzy-snackbar-list--right .vazzy-snackbar__content {
+  padding: 5px 15px 5px 5px;
+}
+
+.vazzy-snackbar-list--left
+  .vazzy-snackbar__inner:not(:only-child)
+  .vazzy-snackbar__content,
+.vazzy-snackbar-list--right
+  .vazzy-snackbar__inner:not(:only-child)
+  .vazzy-snackbar__content {
+  margin: -5px 0 0 0;
+  padding-top: 0;
+}
+
+.vazzy-snackbar-list--fullwidth
+  .vazzy-snackbar--align-center
+  .vazzy-snackbar__inner:not(:only-child)
+  .vazzy-snackbar__content {
+  padding: 0 0 0 20px;
+}
+
+@media (max-width: 767px) {
+  .vazzy-snackbar-list--fullwidth
+    .vazzy-snackbar__inner:not(:only-child)
+    .vazzy-snackbar__content {
+    padding: 0;
+  }
+}
+
+.vazzy-snackbar__close {
+  justify-self: end;
+  order: -1;
+  background-color: transparent;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0;
+  border: 0;
+  height: var(--vazzy-snackbar-close-btn-size);
+  width: var(--vazzy-snackbar-close-btn-size);
+  font-size: var(--vazzy-snackbar-close-btn-size);
+  transition: opacity 170ms;
+}
+
+.vazzy-snackbar-list--fullwidth .vazzy-snackbar__close {
+  order: 2;
+}
+
+.vazzy-snackbar__close:hover {
+  opacity: 0.8;
+}
+
+.vazzy-snackbar-list--left .vazzy-snackbar__actions,
+.vazzy-snackbar-list--right .vazzy-snackbar__actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 5px 0;
+}
+
+@media (max-width: 767px) {
+  .vazzy-snackbar-list--fullwidth .vazzy-snackbar__actions {
+    text-align: right;
+  }
+  .vazzy-snackbar-list--fullwidth
+    .vazzy-snackbar__inner:not(:only-child)
+    .vazzy-snackbar__actions {
+    margin-right: calc(-1 * var(--vazzy-snackbar-close-btn-size));
+  }
+}
+
+.vazzy-snackbar__btn {
+  display: inline-block;
+  cursor: pointer;
+  background-color: var(--vazzy-snackbar-btn-default-background);
+  color: var(--vazzy-snackbar-btn-default-color);
+  font-size: 1rem;
+  line-height: 1em;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  padding: 10px 20px;
+  min-width: 100px;
+  transition: opacity 150ms;
+}
+
+.vazzy-snackbar__btn:hover {
+  text-decoration: none;
+  opacity: 0.85;
+  color: currentColor;
+}
+
+.vazzy-snackbar-list--fullwidth .vazzy-snackbar__btn {
+  margin-left: 15px;
+}
+
+@media (max-width: 767px) {
+  .vazzy-snackbar-list--fullwidth .vazzy-snackbar__btn {
+    margin-left: 0;
+  }
+}
+
+.vazzy-snackbar .dashicons {
+  font-family: dashicons;
+  display: inline-block;
+  line-height: 1;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*
+*  popup
+*/
+.vazzy-snackbar-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 40%);
+  z-index: 999;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  padding: 60px 15px;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 600ms;
+  box-sizing: border-box;
+  color: var(--vazzy-snackbar-popup-color);
+}
+
+.vazzy-snackbar-popup--showed {
+  opacity: 1;
+}
+
+.vazzy-snackbar-popup__inner {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background-color: white;
+  padding: 40px 30px 50px;
+  margin: auto;
+}
+
+@media (max-width: 560px) {
+  .vazzy-snackbar-popup__inner {
+    padding: 40px 20px;
+  }
+}
+
+.vazzy-snackbar-popup__close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 26px;
+  height: 26px;
+  opacity: 0.3;
+  padding: 0;
+  background: transparent;
+  margin: 0;
+  cursor: pointer;
+}
+
+.vazzy-snackbar-popup__close:before,
+.vazzy-snackbar-popup__close:after {
+  position: absolute;
+  left: 12px;
+  top: 0;
+  content: " ";
+  height: 24px;
+  width: 2px;
+  background-color: #333;
+}
+
+.vazzy-snackbar-popup__close:before {
+  transform: rotate(45deg);
+}
+
+.vazzy-snackbar-popup__close:after {
+  transform: rotate(-45deg);
+}
+
+.vazzy-snackbar-popup__close:hover {
+  opacity: 1;
+}
