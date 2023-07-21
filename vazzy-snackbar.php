@@ -14,11 +14,11 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Snackbar
- * Plugin URI:        http://example.com/vazzy-snackbar-uri/
+ * Plugin URI:        https://t.me/devburke/
  * Description:       Snackbar plugin.
  * Version:           1.0.0
- * Author:            @SkyRoket
- * Author URI:        https://t.me/SkyRoket/
+ * Author:            @devburke
+ * Author URI:        https://t.me/devburke/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       vazzy-snackbar
